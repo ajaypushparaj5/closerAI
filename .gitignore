@@ -38,3 +38,5 @@ next-env.d.ts
 .env
 node_modules
 .next
+.env.local
+
