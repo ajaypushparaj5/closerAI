@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #2D3C59;
+  --secondary: #94A378;
+  --accent: #E5BA41;
+  --accent-2: #D1855C;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FAFAF8;
+  color: #2D3C59;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:-translate-y-0.5 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-primary text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:bg-primary hover:text-white hover:-translate-y-0.5;
+  }
+
+  .btn-outline-white {
+    @apply border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:border-white hover:bg-white/10 hover:-translate-y-0.5;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-primary leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-primary/60 font-normal leading-relaxed;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-primary/5 transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+
+  .nav-link {
+    @apply text-white/80 hover:text-white font-medium text-sm transition-colors duration-200;
+  }
+
+  .step-card {
+    @apply relative bg-white rounded-2xl p-8 shadow-sm border border-primary/5;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center mb-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-primary/20 text-primary placeholder:text-primary/40 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-200 bg-white;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-primary/80 mb-2;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2D3C59;
+  border-radius: 3px;
+}
+
+/* Video hero overlay */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 60, 89, 0.92) 0%,
+    rgba(45, 60, 89, 0.75) 50%,
+    rgba(45, 60, 89, 0.88) 100%
+  );
+}
+
+/* Step number */
+.step-number {
+  @apply absolute -top-4 -left-4 w-10 h-10 rounded-full bg-accent text-primary font-bold flex items-center justify-center text-lg shadow-md;
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply h-1.5 bg-primary/10 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-accent rounded-full transition-all duration-500 ease-out;
+}
+
+/* JSON preview */
+.json-preview {
+  @apply font-mono text-sm bg-primary/5 rounded-2xl p-6 overflow-auto max-h-96 border border-primary/10;
+}
+
+/* Status badges */
+.badge-closed {
+  @apply badge bg-secondary/20 text-secondary;
+}
+
+.badge-followup {
+  @apply badge bg-accent/20 text-amber-700;
+}
+
+.badge-lost {
+  @apply badge bg-accent-2/20 text-accent-2;
+}
