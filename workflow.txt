@@ -1,0 +1,20 @@
+# User Workflow
+
+1. **Onboarding:**
+   - User enters service details (Pricing, Services, Delivery Timeline, Tone).
+   - These details are stored and passed to the Bolna agent to provide context for the AI during sales calls.
+
+2. **Dashboard Management:**
+   - User views high-level stats (Closed deals, interest levels).
+   - User can trigger a call from the "Start AI Call" modal.
+
+3. **Outbound Call Session:**
+   - User enters a phone number.
+   - Frontend calls `/api/start-call`.
+   - Node backend initiates a call via Bolna Voice AI.
+   - UI polls for real-time status updates from the Bolna session.
+
+4. **Post-Call Analysis:**
+   - Once the call is finished, Bolna sends a webhook to `/api/call-result`.
+   - The backend stores the extracted interest score, objections, and transcript.
+   - The dashboard updates automatically to show the new lead status.

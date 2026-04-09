@@ -1,0 +1,22 @@
+# System Design Overview
+
+## Architecture
+CloserAI follows a decoupled architecture with a Next.js frontend and an Express backend.
+
+### 1. Frontend (Next.js)
+- **Client Side:** React components for the landing page, onboarding, and dashboard.
+- **API Routes:** Serverless-style routes that act as a proxy to the Express backend to keep API keys hidden from the browser.
+- **State Management:** React hooks (useState, useEffect) for managing call sessions and stats.
+
+### 2. Backend (Express)
+- **Services:** `bolnaService.js` handles direct communication with external Bolna AI APIs.
+- **Endpoints:** RESTful API for starting calls, checking status, and fetching history.
+- **Webhooks:** Listens for POST requests from Bolna to process call results asynchronously.
+
+### 3. External Integrations
+- **Bolna AI:** Orchestrates the voice conversation, handles TTS/STT, and extracts intent.
+- **Telephony:** Routes calls via Bolna's internal pool or the user's connected Twilio account.
+
+## Data Flow
+[User Click] -> [Next.js Route] -> [Express Server] -> [Bolna API] -> [Phone Network]
+[Bolna Webhook] -> [Express Server] -> [Internal DB/State] -> [Dashboard Update]

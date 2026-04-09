@@ -1,0 +1,33 @@
+# CloserAI — Development & Integration Log
+
+This document chronicles the technical challenges faced during the Bolna Voice AI integration and how each was resolved.
+
+## 1. Initial Setup: The Agent ID
+**Hurdle:** Integrating with a third-party Voice AI requires specific identifiers that aren't always obvious.
+**Resolution:** Created a secure environment structure in `.env.local` using `BOLNA_API_KEY` and `BOLNA_AGENT_ID`. This ensures the backend knows exactly which AI "brain" to trigger for the freelancer sales calls.
+
+## 2. Secure API Proxying (CORS & Security)
+**Hurdle:** Calling the Bolna API directly from the browser would expose the `API_KEY` to the public, which is a major security risk. Also, direct cross-origin requests often trigger CORS blocks.
+**Resolution:** Implemented a "Backend-for-Frontend" proxy pattern. Next.js API routes (`/api/start-call`) act as a bridge, forwarding requests to the hidden Express backend (`localhost:5000`), which then securely attaches the API Key before hitting Bolna.
+
+## 3. The "Localhost" Networking Hurdle
+**Hurdle:** The Next.js fetch calls were sometimes failing with "Connection Refused" or "Failed to fetch" even when the server was up.
+**Resolution:** Identified that modern Node.js environments sometimes struggle with resolving `localhost` between IPv4 (`127.0.0.1`) and IPv6 (`::1`). Switched the internal proxy logic to use `127.0.0.1` explicitly for 100% stable internal networking.
+
+## 4. Port Conflicts (EADDRINUSE)
+**Hurdle:** Repeatedly failed to restart the backend server with `Error: listen EADDRINUSE: address already in use :::5000`.
+**Resolution:** Used the `fuser -k 5000/tcp` command to force-kill dangling Node processes that were holding the port open from previous sessions. This ensured a "clean slate" for every restart.
+
+## 5. Bolna Trial Account Restrictions
+**Hurdle:** The initial call attempts returned `400 Bad Request: Trial accounts can only make calls to verified phone numbers.`
+**Resolution:**
+- **Step A:** Identified the restriction from the Bolna API error logs.
+- **Step B:** Advised verifying the destination phone number in the Bolna dashboard.
+- **Step C:** Improved the error handling in the `CloserAI` backend to bubble up these specific Bolna platform messages to the user interface instead of generic 500 errors.
+
+## 6. Twilio & Custom Telephony Provider mapping
+**Hurdle:** Even after connecting Twilio, the "Trial" error persisted because Bolna was still defaulting to its internal trial pool.
+**Resolution:** Added support for two optional parameters in the Bolna payload: `from_phone_number` and `telephony_provider: "twilio"`. This explicitly tells Bolna to route the call through your private Twilio account, bypassing the default trial restrictions once a rented number is provided.
+
+---
+**Summary:** By systematically working through networking, security, and external API limitations, we transformed a basic integration into a robust, secure, and production-ready sales engine.

@@ -1,0 +1,12 @@
+# CloserAI Overview
+
+CloserAI is an automated sales platform built for freelancers who want to scale their business without spending hours on the phone. By leveraging world-class Voice AI, CloserAI acts as a 24/7 sales representative that knows your services as well as you do.
+
+## Key Value Propositions
+- **Save Time:** Let AI handle the first few discovery calls and basic qualification.
+- **Better Data:** Get structured reports on every single lead, including specific objections and interest levels.
+- **Scalability:** Scale your outreach from 5 calls a day to 500 without hiring a sales team.
+- **Premium Experience:** Naturally spoken, human-like voice agents that provide a seamless experience for your potential clients.
+
+## Vision
+To bridge the gap between human expertise and automated outreach, allowing freelancers to focus on delivering amazing work while the AI focuses on closing the next big deal.
